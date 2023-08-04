@@ -16,13 +16,19 @@ export class PostEntity {
     @Column({name: 'content', type: 'text'})
     content: string
 
-    @Column({name: 'reactionCount', type: 'int', default:0})
+    @Column({name: 'sub_title', type: 'text'})
+    subTitle: string
+
+    @Column({name: 'image_url', type: 'text'})
+    imageUrl: string
+
+    @Column({name: 'reaction_count', type: 'int', default:0})
     reactionCount: number
 
-    @Column({name: 'shareCount', type: 'int', default:0})
+    @Column({name: 'share_count', type: 'int', default:0})
     shareCount: number
 
-    @Column({name: 'commnentCount', type: 'int', default:0})
+    @Column({name: 'commnent_count', type: 'int', default:0})
     commnentCount: number
 
     @Column({name: 'is_approved', type: 'boolean', default: false})
