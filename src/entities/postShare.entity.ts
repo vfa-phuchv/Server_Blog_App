@@ -25,11 +25,11 @@ export class PostShareEntity {
     visibility: boolean
 
     @ManyToOne(() => Post, post => post.postShares)
-    @JoinColumn({name: 'post_id', referencedColumnName: 'post_id'})
+    @JoinColumn({name: 'post_id', referencedColumnName: 'postId'})
     post: Post
 
     @ManyToOne(() => User, user => user.postShares)
-    @JoinColumn({name: 'sharer_id', referencedColumnName: 'user_id'})
+    @JoinColumn({name: 'sharer_id', referencedColumnName: 'userId'})
     sharer: User
 
     @OneToMany(() => Reaction, reaction => reaction.postShare)

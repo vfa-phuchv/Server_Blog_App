@@ -3,7 +3,6 @@ import {TagDetailEntity as TagDetail} from './tagDetail.entity'
 
 @Entity('tags')
 export class TagEntity {
-
     @PrimaryGeneratedColumn({name: 'tag_id'})
     tagId: number
     

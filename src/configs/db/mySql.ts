@@ -2,7 +2,6 @@ import {TypeOrmModuleOptions} from  '@nestjs/typeorm'
 // import {DataSource, DataSourceOptions} from 'typeorm'
 import * as path from 'path'
 import * as dotenv from 'dotenv'
-import { UserEntity } from 'src/entities/user.entity'
 dotenv.config()
 
 const dbConfig: TypeOrmModuleOptions = {

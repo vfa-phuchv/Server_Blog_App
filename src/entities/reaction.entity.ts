@@ -21,15 +21,15 @@ export class ReactionEntity {
     react: string
 
     @ManyToOne(() => Post, post => post.reactions)
-    @JoinColumn({name: 'post_id', referencedColumnName: 'post_id'})
+    @JoinColumn({name: 'post_id', referencedColumnName: 'postId'})
     post?: Post
 
     @ManyToOne(() => PostShare, postShare => postShare.reactions)
-    @JoinColumn({name: 'post_share_id', referencedColumnName: 'post_share_id'})
+    @JoinColumn({name: 'post_share_id', referencedColumnName: 'postShareId'})
     postShare?: PostShare
 
     @ManyToOne(() => User, user => user.reactions)
-    @JoinColumn({name: 'user_id', referencedColumnName: 'user_id'})
+    @JoinColumn({name: 'user_id', referencedColumnName: 'userId'})
     user: User
  
     @CreateDateColumn({name: 'created_at'})

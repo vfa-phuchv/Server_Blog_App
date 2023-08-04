@@ -35,7 +35,7 @@ export class PostEntity {
     visibility: boolean
 
     @ManyToOne(() => User, user => user.posts)
-    @JoinColumn({name: 'author_id', referencedColumnName: 'user_id'})
+    @JoinColumn({name: 'author_id', referencedColumnName: 'userId'})
     author: User
 
     @OneToMany(() => TagDetail, tagDetail => tagDetail.post)
