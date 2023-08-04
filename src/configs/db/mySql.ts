@@ -13,7 +13,7 @@ const dbConfig: TypeOrmModuleOptions = {
     database: process.env.RDS_DATABASE,
     // logger: 'debug',
     // charset: 'utf8mb4',
-    synchronize: true,
+    synchronize: false,
     entities: [path.join(__dirname, '../..', '/entities/*.entity{.ts,.js}')],
     migrations: [path.join(__dirname, '../..', '/migration/*{.ts,.js}')],
     // autoLoadEntities: true,
