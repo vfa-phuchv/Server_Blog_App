@@ -47,11 +47,15 @@ export class PostService {
         })
     }
 
-    async getListPost() {
+    async getListPost(page: number, perPage: number) {
+        const skip = page ? (page - 1) * perPage : 0;
+        const take = perPage ?? 10;
         return this.postRepository.find({
             order: {
                 datePublished: 'DESC'
-            }
+            }, 
+            skip, 
+            take
         })
     }
 }

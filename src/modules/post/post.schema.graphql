@@ -22,6 +22,10 @@ input createPostDto {
     visibility: Boolean
 }
 
+type Query {
+    getAllPost(page: Int!, perPage: Int!): [Post!]!
+}
+
 type Mutation {
     createPost(createPostInput: createPostDto!): Post!
 }

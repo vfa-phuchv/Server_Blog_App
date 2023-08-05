@@ -16,4 +16,9 @@ export class PostResolver {
         const {userId} = user;
         return await this.postService.createPost(userId, createPostInput);  
     }
+
+    @Query('getAllPost')
+    async getListPost(@Args('page') page: number, @Args('perPage') perPage: number) { 
+        return await this.postService.getListPost(page, perPage);
+    }
 } 

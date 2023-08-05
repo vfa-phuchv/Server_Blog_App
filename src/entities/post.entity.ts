@@ -34,7 +34,7 @@ export class PostEntity {
     @Column({name: 'is_approved', type: 'boolean', default: false})
     isApproved: boolean
 
-    @Column({name: 'date_published', type: 'date', nullable: true}) 
+    @UpdateDateColumn({name: 'date_published'}) 
     datePublished: Date
 
     @Column({name: 'visibility', type: 'boolean', default: true})
