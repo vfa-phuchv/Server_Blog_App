@@ -1,0 +1,37 @@
+
+input createUserDto {
+    email: String!
+    password: String!
+    nickName: String
+    role: ROLE!
+}
+
+input loginUserDto {
+  email: String!
+  password: String!
+}
+
+type RegisterResponse {
+  email: String
+  nickName: String
+  dateOfBirth: Date
+  avatar: String
+  role: ROLE
+}
+
+type AuthData {
+  accessToken: String
+  refreshToken: String
+  expired: String
+  tokenType: String
+}
+
+type LoginResponse {
+  auth: AuthData   
+  user: User
+}
+
+type Mutation {
+    register(userDataInput: createUserDto!):RegisterResponse
+    login(userDataInput: loginUserDto!): LoginResponse
+}

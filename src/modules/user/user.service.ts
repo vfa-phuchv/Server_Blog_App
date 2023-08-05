@@ -1,27 +1,34 @@
-import { Injectable } from '@nestjs/common';
-import { CreateUserInput } from './dto/create-user.input';
-import { UpdateUserInput } from './dto/update-user.input';
+import { Injectable, HttpException, HttpStatus, BadRequestException } from '@nestjs/common';
+import {InjectRepository} from '@nestjs/typeorm'
+import {Repository} from 'typeorm'
+import {UserEntity} from '../../entities/user.entity'
 
 @Injectable()
 export class UserService {
+    constructor(
+      @InjectRepository(UserEntity)
+      private userRepository : Repository<UserEntity>
+    ) {}
 
-  create(createUserInput: CreateUserInput) {
-    return 'This action adds a new user';
-  }
+    async findUserByEmail (email: string): Promise<UserEntity> {
+      return this.userRepository.findOne({where: { email }})
+    }
 
-  findAll() { 
-    return `This action returns all user`;
-  }
+    async createUser(data) { 
+      try{
+        const {email, password, nickName, role} = data;
+        const user = new UserEntity();
+        user.email = email;
+        user.password = password;
+        user.nickName = nickName;
+        user.role = role;
+        const newUser = this.userRepository.create(user);
+        const savedUser = await this.userRepository.save(newUser);
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
-  }
+        return savedUser; 
+      }catch(ex){
+        throw new BadRequestException(ex);
+      }
+    }
 
-  update(id: number, updateUserInput: UpdateUserInput) {
-    return `This action updates a #${id} user`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} user`;
-  }
 }

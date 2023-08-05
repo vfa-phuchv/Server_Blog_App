@@ -1,28 +1,19 @@
+scalar Date
+
+enum ROLE {
+  admin
+  user
+}
 
 type User {
-  # Example field (placeholder)
-  exampleField: Int
-}
-
-input CreateUserInput {
-  # Example field (placeholder)
-  exampleField: Int
-}
-
-input UpdateUserInput {
-  id: Int! 
-}
-
-type Query {
-  user(id: Int!): User
-}
-
-type Query {
-  findUser(id: Int!): String
-}
-
-type Mutation {
-  createUser(createUserInput: CreateUserInput!): User!
-  updateUser(updateUserInput: UpdateUserInput!): User!
-  removeUser(id: Int!): User
+  userId: String
+  email: String
+  password: String
+  nickName: String
+  dateOfBirth: Date
+  avatar: String
+  role: ROLE
+  refreshToken: String 
+  createdAt: Date
+  updatedAt: Date
 }
