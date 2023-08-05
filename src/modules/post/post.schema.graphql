@@ -1,0 +1,27 @@
+type Post {
+    postId: Int
+    caption: String
+    content: String
+    subTitle: String
+    imageUrl: String
+    reactionCount: Int
+    shareCount: Int
+    commnentCount: Int
+    isApproved: Boolean
+    datePublished: Date
+    visibility: Boolean
+    createdAt: Date
+    updatedAt: Date
+}
+
+input createPostDto {
+    caption: String
+    subTitle: String
+    content: String
+    imageUrl: String
+    visibility: Boolean
+}
+
+type Mutation {
+    createPost(createPostInput: createPostDto!): Post!
+}

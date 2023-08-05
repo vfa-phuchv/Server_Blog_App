@@ -13,7 +13,7 @@ export class PostEntity {
     @Column({name: 'caption', type: 'text'})
     caption: string
 
-    @Column({name: 'content', type: 'text'})
+    @Column({name: 'content', type: 'text'}) 
     content: string
 
     @Column({name: 'sub_title', type: 'text'})
@@ -34,7 +34,7 @@ export class PostEntity {
     @Column({name: 'is_approved', type: 'boolean', default: false})
     isApproved: boolean
 
-    @Column({name: 'date_published', type: 'date'})
+    @Column({name: 'date_published', type: 'date', nullable: true}) 
     datePublished: Date
 
     @Column({name: 'visibility', type: 'boolean', default: true})

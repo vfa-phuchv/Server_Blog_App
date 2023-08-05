@@ -10,10 +10,17 @@ export class UserService {
       private userRepository : Repository<UserEntity>
     ) {}
 
+    //* method find User by Email
     async findUserByEmail (email: string): Promise<UserEntity> {
       return this.userRepository.findOne({where: { email }})
     }
 
+    //* method find User by userId
+    async findUserById(userId: string): Promise<UserEntity> {
+      return this.userRepository.findOne({where: {userId}})
+    }
+
+    //* method create User
     async createUser(data) { 
       try{
         const {email, password, nickName, role} = data;
