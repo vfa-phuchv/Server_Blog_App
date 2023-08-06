@@ -4,11 +4,11 @@ import {PostService} from './post.service'
 import {TypeOrmModule} from '@nestjs/typeorm'
 import { PostEntity } from "../../entities/post.entity"
 import {UserModule} from '../user/user.module'
-import {S3Service} from '../../common/utils/upload.service'
+import { CloudinaryService } from '../../common/utils/cloudinary.service'
 
 @Module({
     imports: [UserModule, TypeOrmModule.forFeature([PostEntity])],
-    providers: [PostResolver, PostService, S3Service],
+    providers: [PostResolver, PostService, CloudinaryService],
 })
 
 export class PostModule {}
