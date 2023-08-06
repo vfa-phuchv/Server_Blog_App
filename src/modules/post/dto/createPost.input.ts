@@ -13,7 +13,7 @@ export class createPostDto{
     content: string;
 
     @IsString()
-    imageUrl: string;
+    imageFile: string;
 
     @IsBoolean()
     visibility: boolean;
