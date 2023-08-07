@@ -22,10 +22,22 @@ input createPostDto {
     visibility: Boolean
 }
 
+input updatePostDto {
+    caption: String
+    subTitle: String
+    content: String
+    imageFile: String
+    visibility: Boolean
+}
+
 type Query {
+    getPost(postId: Int!): Post!
+    getPostOfUser: [Post!]!
     getAllPost(page: Int!, perPage: Int!): [Post!]!
 }
 
 type Mutation {
     createPost(createPostInput: createPostDto!): Post!
+    updatePost(updatePostInput: updatePostDto!, postId: Int!): Post!
+    deletePost(postId: Int!): Int
 }
