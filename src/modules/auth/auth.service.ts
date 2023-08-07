@@ -39,7 +39,40 @@ export class AuthService {
     const user = await this.validateUser(email, password);
     const payload = {userId: user.userId, email: user.email};
     const auth = await this.createAuthToken(payload);
+
+    //* save refreshToken
+    const {userId} = user;
+    const {refreshToken} = auth
+    await this.userService.updateRefreshToken(userId, refreshToken);
+
     return {auth, user};
+  }
+
+  async logout(userId: string) {
+    try{
+      await this.userService.updateRefreshToken(userId, '');
+      return 'logout success'
+    }catch(err){
+      throw new BadRequestException(err)
+    }
+  }
+
+  async refreshToken(token: string) {
+    try{
+      const data = await this.jwtService.verify(token, {
+        secret: process.env.JWT_REFRESH_KEY,
+        ignoreExpiration: false 
+      })
+  
+      const {userId, email} = data;
+      const user = await this.userService.findUserById(userId);
+      const payload = {userId, email};
+      const auth = await this.createAuthToken(payload);
+      
+      return {auth, user};
+    }catch (error) {
+      throw new UnauthorizedException(error);
+    }
   }
 
   //* method validate User with "email" & "password"  
@@ -58,15 +91,18 @@ export class AuthService {
 
   //* method create Auth Token 
   async createAuthToken(payload: {userId: string, email: string}) {
-    const {token: accessToken, expired} = await this.generateToken(payload);
-    const {token: refreshToken} = await this.generateToken(payload);
+    const {token: accessToken, expired} = await this.generateToken(payload, process.env.JWT_ACCESS_KEY, parseInt(process.env.JWT_ACCESS_TOKEN_EXPIRE_TIME));
+    const {token: refreshToken} = await this.generateToken(payload, process.env.JWT_REFRESH_KEY, parseInt(process.env.JWT_REFRESH_TOKEN_EXPIRE_TIME));
     return {accessToken, refreshToken, expired, tokenType: 'Bearer'};
   }
 
   //* method generate Token
-  async generateToken(payload: {userId:string, email: string}) {
+  async generateToken(payload: {userId:string, email: string}, secretKey: string, expTime: number) {
     const expired: string = moment().second(parseInt(process.env.JWT_ACCESS_TOKEN_EXPIRE_TIME)).toISOString();
-    const token: string = await this.jwtService.signAsync(payload);
+    const token: string = await this.jwtService.signAsync(payload,{
+      secret: secretKey,
+      expiresIn: expTime
+    });
     return {token, expired};
   }
 }

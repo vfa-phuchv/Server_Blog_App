@@ -31,7 +31,14 @@ type LoginResponse {
   user: User
 }
 
+type refreshTokenResponse {
+  auth: AuthData   
+  user: User
+}
+
 type Mutation {
     register(userDataInput: createUserDto!):RegisterResponse
     login(userDataInput: loginUserDto!): LoginResponse
+    refreshToken(refreshToken: String!): refreshTokenResponse
+    logout: String!
 }
