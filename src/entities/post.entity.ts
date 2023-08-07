@@ -16,10 +16,10 @@ export class PostEntity {
     @Column({name: 'content', type: 'text'}) 
     content: string
 
-    @Column({name: 'sub_title', type: 'text'})
+    @Column({name: 'sub_title', type: 'text', nullable: true})
     subTitle: string
 
-    @Column({name: 'image_url', type: 'text'})
+    @Column({name: 'image_url', type: 'text', nullable: true})
     imageUrl: string
 
     @Column({name: 'reaction_count', type: 'int', default:0})

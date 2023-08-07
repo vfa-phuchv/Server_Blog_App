@@ -10,11 +10,14 @@ export class createPostDto{
     subTitle: string;
 
     @IsString()
+    @IsOptional()
     content: string;
 
     @IsString()
+    @IsOptional()
     imageFile: string;
 
     @IsBoolean()
+    @IsOptional()
     visibility: boolean;
 } 
