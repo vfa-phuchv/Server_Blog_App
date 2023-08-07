@@ -1,40 +1,48 @@
-import {Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, ManyToOne, JoinColumn} from 'typeorm'
-import {PostEntity as Post} from './post.entity'
-import {PostShareEntity as PostShare} from './postShare.entity'
-import {UserEntity as User} from './user.entity'
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  CreateDateColumn,
+  UpdateDateColumn,
+  ManyToOne,
+  JoinColumn,
+} from 'typeorm';
+import { PostEntity as Post } from './post.entity';
+import { PostShareEntity as PostShare } from './postShare.entity';
+import { UserEntity as User } from './user.entity';
 
 enum REACT {
-    LIKE = 'like',
-    LOVE = 'love',
-    HAHA = 'haha',
-    WOW = 'wow',
-    SAD = 'sad',
-    ANGRY = 'angry'
+  LIKE = 'like',
+  LOVE = 'love',
+  HAHA = 'haha',
+  WOW = 'wow',
+  SAD = 'sad',
+  ANGRY = 'angry',
 }
 
 @Entity('reactions')
 export class ReactionEntity {
-    @PrimaryGeneratedColumn({name: 'reaction_id'})
-    reactionId: number
+  @PrimaryGeneratedColumn({ name: 'reaction_id' })
+  reactionId: number;
 
-    @Column({name: 'react', type: 'enum', enum: REACT, default: REACT.LIKE})
-    react: string
+  @Column({ name: 'react', type: 'enum', enum: REACT, default: REACT.LIKE })
+  react: string;
 
-    @ManyToOne(() => Post, post => post.reactions)
-    @JoinColumn({name: 'post_id', referencedColumnName: 'postId'})
-    post?: Post
+  @ManyToOne(() => Post, (post) => post.reactions)
+  @JoinColumn({ name: 'post_id', referencedColumnName: 'postId' })
+  post?: Post;
 
-    @ManyToOne(() => PostShare, postShare => postShare.reactions)
-    @JoinColumn({name: 'post_share_id', referencedColumnName: 'postShareId'})
-    postShare?: PostShare
+  @ManyToOne(() => PostShare, (postShare) => postShare.reactions)
+  @JoinColumn({ name: 'post_share_id', referencedColumnName: 'postShareId' })
+  postShare?: PostShare;
 
-    @ManyToOne(() => User, user => user.reactions)
-    @JoinColumn({name: 'user_id', referencedColumnName: 'userId'})
-    user: User
- 
-    @CreateDateColumn({name: 'created_at'})
-    createdAt: Date
+  @ManyToOne(() => User, (user) => user.reactions)
+  @JoinColumn({ name: 'user_id', referencedColumnName: 'userId' })
+  user: User;
 
-    @UpdateDateColumn({name: 'updated_at'})
-    updatedAt: Date
+  @CreateDateColumn({ name: 'created_at' })
+  createdAt: Date;
+
+  @UpdateDateColumn({ name: 'updated_at' })
+  updatedAt: Date;
 }

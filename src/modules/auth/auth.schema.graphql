@@ -1,9 +1,8 @@
-
 input createUserDto {
-    email: String!
-    password: String!
-    nickName: String
-    role: ROLE!
+  email: String!
+  password: String!
+  nickName: String
+  role: ROLE!
 }
 
 input loginUserDto {
@@ -27,18 +26,18 @@ type AuthData {
 }
 
 type LoginResponse {
-  auth: AuthData   
+  auth: AuthData
   user: User
 }
 
 type refreshTokenResponse {
-  auth: AuthData   
+  auth: AuthData
   user: User
 }
 
 type Mutation {
-    register(userDataInput: createUserDto!):RegisterResponse
-    login(userDataInput: loginUserDto!): LoginResponse
-    refreshToken(refreshToken: String!): refreshTokenResponse
-    logout: String!
+  register(userDataInput: createUserDto!): RegisterResponse
+  login(userDataInput: loginUserDto!): LoginResponse
+  refreshToken(refreshToken: String!): refreshTokenResponse
+  logout: String!
 }
