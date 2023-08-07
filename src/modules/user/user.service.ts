@@ -20,6 +20,15 @@ export class UserService {
       return this.userRepository.findOne({where: {userId}})
     }
 
+    //* method update Refresh token
+    async updateRefreshToken(userId: string, refreshToken: string) {
+      const user = await this.userRepository.findOne({where: {userId}});
+      if(user){
+        user.refreshToken = refreshToken;
+        this.userRepository.save(user);
+      }
+    } 
+
     //* method create User
     async createUser(data) { 
       try{

@@ -1,0 +1,57 @@
+version: '3.7'
+
+services:
+  blog_app:
+    image: blog_app:latest
+    build: 
+      context: .
+      target: builder
+    container_name: blog_app
+    env_file: ./.env
+    environment:
+      # APP_PORT: 3000
+      # DATABASE
+      DB_CONNECTION: $DB_CONNECTION
+      RDS_PORT: $RDS_PORT
+      RDS_USERNAME: $RDS_USERNAME
+      RDS_PASSWORD: $RDS_PASSWORD
+      RDS_DATABASE: $RDS_DATABASE
+      RDS_HOST: $RDS_HOST
+      # TOKEN
+      JWT_ACCESS_TOKEN_EXPIRE_TIME: $JWT_ACCESS_TOKEN_EXPIRE_TIME
+      JWT_REFRESH_TOKEN_EXPIRE_TIME: $JWT_REFRESH_TOKEN_EXPIRE_TIME
+      JWT_ACCESS_KEY: $JWT_ACCESS_KEY
+      JWT_REFRESH_KEY: $JWT_REFRESH_KEY
+      JWT_EXPIRE_TIME: $JWT_EXPIRE_TIME
+      # CLOUDINARY
+      CLOUD_NAME: $CLOUD_NAME
+      API_KEY: $API_KEY
+      API_SECRECT: $API_SECRECT
+      FOLDER_NAME: $FOLDER_NAME
+    ports:
+      - 3000:3000
+    volumes:
+      - ./src:/builder/app/src
+    networks:
+      - nw_blog_app_mysql
+    depends_on: 
+    - blog_db
+
+  blog_db:
+    image: mysql:8.0
+    container_name: blog_db
+    environment:
+      MYSQL_ROOT_PASSWORD: $RDS_PASSWORD
+      MYSQL_DATABASE: $RDS_DATABASE
+      MYSQL_USER: $RDS_USERNAME 
+      MYSQL_PASSWORD: $RDS_PASSWORD
+    ports:
+      - 3307:3306
+    volumes:
+      - ./docker/mysql:/var/lib/mysql
+    networks:
+      - nw_blog_app_mysql
+
+networks:
+  nw_blog_app_mysql:
+    driver: bridge

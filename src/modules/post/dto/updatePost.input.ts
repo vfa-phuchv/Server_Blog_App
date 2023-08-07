@@ -1,6 +1,6 @@
 import { IsString, IsNotEmpty, IsOptional, IsBoolean } from 'class-validator';
 
-export class createPostDto {
+export class updatePostDto {
   @IsString()
   @IsOptional()
   caption: string;

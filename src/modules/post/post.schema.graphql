@@ -1,31 +1,43 @@
 type Post {
-    postId: Int
-    caption: String
-    content: String
-    subTitle: String
-    imageUrl: String
-    reactionCount: Int
-    shareCount: Int
-    commnentCount: Int
-    isApproved: Boolean
-    datePublished: Date
-    visibility: Boolean
-    createdAt: Date
-    updatedAt: Date
+  postId: Int
+  caption: String
+  content: String
+  subTitle: String
+  imageUrl: String
+  reactionCount: Int
+  shareCount: Int
+  commnentCount: Int
+  isApproved: Boolean
+  datePublished: Date
+  visibility: Boolean
+  createdAt: Date
+  updatedAt: Date
 }
 
 input createPostDto {
-    caption: String
-    subTitle: String
-    content: String
-    imageFile: String
-    visibility: Boolean
+  caption: String
+  subTitle: String
+  content: String
+  imageFile: String
+  visibility: Boolean
+}
+
+input updatePostDto {
+  caption: String
+  subTitle: String
+  content: String
+  imageFile: String
+  visibility: Boolean
 }
 
 type Query {
-    getAllPost(page: Int!, perPage: Int!): [Post!]!
+  getPost(postId: Int!): Post!
+  getPostOfUser: [Post!]!
+  getAllPost(page: Int!, perPage: Int!): [Post!]!
 }
 
 type Mutation {
-    createPost(createPostInput: createPostDto!): Post!
+  createPost(createPostInput: createPostDto!): Post!
+  updatePost(updatePostInput: updatePostDto!, postId: Int!): Post!
+  deletePost(postId: Int!): Int
 }

@@ -1,20 +1,20 @@
-import {Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, OneToMany} from 'typeorm'
-import {TagDetailEntity as TagDetail} from './tagDetail.entity'
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, OneToMany } from 'typeorm';
+import { TagDetailEntity as TagDetail } from './tagDetail.entity';
 
 @Entity('tags')
 export class TagEntity {
-    @PrimaryGeneratedColumn({name: 'tag_id'})
-    tagId: number
-    
-    @Column({name: 'name', type: 'varchar', length: 255, nullable: false})
-    name: string
+  @PrimaryGeneratedColumn({ name: 'tag_id' })
+  tagId: number;
 
-    @OneToMany(() => TagDetail, tagDetail => tagDetail.tag)
-    tagDetails?: TagDetail[]
+  @Column({ name: 'name', type: 'varchar', length: 255, nullable: false })
+  name: string;
 
-    @CreateDateColumn({name: 'created_at'})
-    createdAt: Date
+  @OneToMany(() => TagDetail, (tagDetail) => tagDetail.tag)
+  tagDetails?: TagDetail[];
 
-    @UpdateDateColumn({name: 'updated_at'})
-    updatedAt: Date
+  @CreateDateColumn({ name: 'created_at' })
+  createdAt: Date;
+
+  @UpdateDateColumn({ name: 'updated_at' })
+  updatedAt: Date;
 }
