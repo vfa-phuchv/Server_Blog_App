@@ -116,4 +116,31 @@ export class PostService {
 
     return posts;
   }
+
+  async getPostPending() {
+    const posts = await this.postRepository.find({
+      where: {
+        isApproved: false,
+      },
+      order: {
+        updatedAt: 'DESC',
+      },
+    });
+    return posts;
+  }
+
+  async approvePost(postId: number): Promise<string> {
+    const post = await this.postRepository.findOne({ where: { postId: Number(postId) } });
+
+    if (_.isEmpty(post)) {
+      throw new BadRequestException('Post does not exists');
+    }
+    post.isApproved = true;
+    try {
+      await this.postRepository.save(post);
+      return 'approved success!';
+    } catch (err) {
+      return 'approved failure!';
+    }
+  }
 }

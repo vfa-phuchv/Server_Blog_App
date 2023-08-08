@@ -4,6 +4,7 @@ import { createPostDto } from './dto/createPost.input';
 import { updatePostDto } from './dto/updatePost.input';
 import { UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from '../../guards/auth.guard';
+import { AdminGuard } from '../../guards/admin.guard';
 import { GqlUser } from '../../decorators/user.decorator';
 import { UserEntity } from '../../entities/user.entity';
 
@@ -36,6 +37,12 @@ export class PostResolver {
     return await this.postService.deletePost(userId, postId);
   }
 
+  @Mutation('approvePost')
+  @UseGuards(JwtAuthGuard, AdminGuard)
+  async approvePost(@Args('postId') postId: number) {
+    return await this.postService.approvePost(postId);
+  }
+
   @Query('getAllPost')
   async getListPost(@Args('page') page: number, @Args('perPage') perPage: number) {
     return await this.postService.getListPost(page, perPage);
@@ -51,5 +58,11 @@ export class PostResolver {
   async getPostOfUser(@GqlUser() user: UserEntity) {
     const { userId } = user;
     return await this.postService.getPostOfUser(userId);
+  }
+
+  @Query('getPostPending')
+  @UseGuards(JwtAuthGuard, AdminGuard)
+  async getPostPending() {
+    return await this.postService.getPostPending();
   }
 }
