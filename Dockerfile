@@ -2,7 +2,8 @@
 FROM node:18 AS builder
 
 # Set the working directory in the container to /app
-WORKDIR /app
+ENV HOME=builder/app
+WORKDIR ${HOME}
 
 # Copy the package.json and package-lock.json files to the container
 COPY package*.json ./
