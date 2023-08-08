@@ -24,12 +24,12 @@
 
 
 ## Features
-  - Authentication with JWT
- 	- User CRUD Post
- 	- Get list Post with load more
- 	- Admin get list Post and approve
- 	- Upload image
- 	- Migration database
+  ✅ Authentication with JWT
+ 	✅ User CRUD Post
+ 	✅ Get list Post with load more
+ 	✅ Admin get list Post and approve
+ 	✅ Upload image
+ 	✅ Migration database
 
 ## ERD 
 ![Alt text](https://res.cloudinary.com/dwskvqnkc/image/upload/v1691474717/vfa_blog_app_store/vfa-ERD.drawio_an1y1m.png)
