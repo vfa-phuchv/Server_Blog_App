@@ -22,6 +22,18 @@
   <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
+
+## Features
+  - Authentication with JWT
+ 	- User CRUD Post
+ 	- Get list Post with load more
+ 	- Admin get list Post and approve
+ 	- Upload image
+ 	- Migration database
+
+## ERD 
+![Alt text](https://res.cloudinary.com/dwskvqnkc/image/upload/v1691474717/vfa_blog_app_store/vfa-ERD.drawio_an1y1m.png)
+
 ## Description
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
@@ -72,5 +84,3 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 
 Nest is [MIT licensed](LICENSE).
 
-## ERD 
-![Alt text](https://res.cloudinary.com/dwskvqnkc/image/upload/v1691474717/vfa_blog_app_store/vfa-ERD.drawio_an1y1m.png)
