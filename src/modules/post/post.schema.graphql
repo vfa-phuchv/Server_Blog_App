@@ -34,10 +34,12 @@ type Query {
   getPost(postId: Int!): Post!
   getPostOfUser: [Post!]!
   getAllPost(page: Int!, perPage: Int!): [Post!]!
+  getPostPending: [Post!]!
 }
 
 type Mutation {
   createPost(createPostInput: createPostDto!): Post!
   updatePost(updatePostInput: updatePostDto!, postId: Int!): Post!
   deletePost(postId: Int!): Int
+  approvePost(postId: Int!): String
 }
